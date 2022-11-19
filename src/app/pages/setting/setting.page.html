@@ -1,0 +1,259 @@
+<ion-header no-border class="fixed">
+  <ion-toolbar no-border color="primary">
+    <ion-title>
+      <strong>{{ settingArray['Empresa'] }}</strong>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button id="acerca">
+        <ion-icon name="alert-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-popover trigger="acerca" side="bottom" alignment="start">
+        <ng-template>
+          <ion-content class="ion-padding">
+            Corporación de Sistemas NKS&copy; 
+          </ion-content>
+        </ng-template>
+      </ion-popover>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header class="sub-header fixed" color="primary" no-border>
+  <ion-toolbar no-border color="primary">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <ion-text>
+              <strong>Ajustes</strong>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label>
+          <ion-icon name="business-outline" slot="start"></ion-icon>
+          EMPRESA: {{ settingArray['Empresa'] }}
+          <ion-input
+          class="custom"
+          type="string"
+          [(ngModel)]="settingArray['Empresa']"
+          required
+        ></ion-input>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+      <ion-label> Tema oscuro </ion-label>
+      <ion-toggle [checked]="tema" slot="end" (ionChange)="toggleTheme($event)"></ion-toggle>
+    </ion-item>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+
+  <ion-card>
+    <ion-card-header color="warning"> NOTA </ion-card-header>
+    <ion-card-content style="padding-top: 1rem;">
+      <ion-row>
+        <ion-col>
+              <ion-text>
+                El separador de los CAMPOS debe ser <strong>;</strong>
+              </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color="primary" style="display: flex; justify-content: space-between"> 
+      <ion-text>
+        CONFIGURAR CSV CLIENTES 
+      </ion-text>
+      <div>
+        <ion-button expand="block" (click)="save()" mt="20" mb="20" style="margin-left: 12px; margin-right: 12px; margin-bottom: 20px;" color="warning" slot="icon-only">
+          <ion-icon name="save-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label> Fila de inicio de la DATA</ion-label>
+        <ion-input
+          class="custom"
+          type="number"
+          min="0"
+          style="width: 50px; text-align: right"
+          [(ngModel)]="settingArray['InicioDataCsvClientes']"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Columna CÓDIGO</ion-label>
+        <ion-input
+          class="custom"
+          type="number"
+          min="0"
+          style="width: 50px; text-align: right"
+          [(ngModel)]="settingArray['ColumnaCodigoClientes']"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Columna RIF</ion-label>
+        <ion-input
+          class="custom"
+          type="number"
+          min="0"
+          style="width: 50px; text-align: right"
+          [(ngModel)]="settingArray['ColumnaRifClientes']"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Columna NOMBRE</ion-label>
+        <ion-input
+          class="custom"
+          type="number"
+          min="0"
+          style="width: 50px; text-align: right"
+          [(ngModel)]="settingArray['ColumnaNombreClientes']"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Columna CELULAR</ion-label>
+        <ion-input
+          class="custom"
+          style="width: 50px; text-align: right"
+          type="number"
+          min="0"
+          [(ngModel)]="settingArray['ColumnaCelularClientes']"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Columna DIRECCIÓN</ion-label>
+        <ion-input
+          class="custom"
+          style="width: 50px; text-align: right"
+          type="number"
+          min="0"
+          [(ngModel)]="settingArray['ColumnaDireccionClientes']"
+          required
+        ></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header color="primary" style="display:flex; justify-content: space-between">
+      <ion-text>
+        CONFIGURAR CSV INVENTARIO
+      </ion-text>
+      <div>
+        <ion-button expand="block" (click)="save()" mt="20" mb="20" style="margin-left: 12px; margin-right: 12px; margin-bottom: 20px;" color="warning" slot="icon-only">
+          <ion-icon name="save-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label> Fila de inicio de la DATA</ion-label>
+        <ion-input
+          class="custom"
+          style="width: 50px; text-align: right"
+          type="number"
+          min="0"
+          [(ngModel)]="settingArray['InicioDataCsvInventario']"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Columna CÓDIGO</ion-label>
+        <ion-input
+          class="custom"
+          style="width: 50px; text-align: right"
+          type="number"
+          min="0"
+          [(ngModel)]="settingArray['ColumnaCodigoInventario']"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Columna NOMBRE</ion-label>
+        <ion-input
+          class="custom"
+          style="width: 50px; text-align: right"
+          type="number"
+          min="0"
+          [(ngModel)]="settingArray['ColumnaNombreInventario']"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Columna UNIDAD</ion-label>
+        <ion-input
+          class="custom"
+          style="width: 50px; text-align: right"
+          type="number"
+          min="0"
+          [(ngModel)]="settingArray['ColumnaUnidadInventario']"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Columna EXISTENCIA</ion-label>
+        <ion-input
+          class="custom"
+          style="width: 50px; text-align: right"
+          type="number"
+          min="0"
+          [(ngModel)]="settingArray['ColumnaExistenciaInventario']"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Columna PRECIO 1</ion-label>
+        <ion-input
+          class="custom"
+          style="width: 50px; text-align: right"
+          type="number"
+          min="0"
+          [(ngModel)]="settingArray['ColumnaPrecio1Inventario']"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Columna PRECIO 2</ion-label>
+        <ion-input
+          class="custom"
+          style="width: 50px; text-align: right"
+          type="number"
+          min="0"
+          [(ngModel)]="settingArray['ColumnaPrecio2Inventario']"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Columna PRECIO 3</ion-label>
+        <ion-input
+          class="custom"
+          style="width: 50px; text-align: right"
+          type="number"
+          min="0"
+          [(ngModel)]="settingArray['ColumnaPrecio3Inventario']"
+          required
+        ></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <p></p>
+</ion-content>

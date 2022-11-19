@@ -24,3 +24,13 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+// ion-modal.my-modal-class::part(content) {
+//     --height: 99%;
+//     position: absolute;
+//     margin-top: 1%;
+//     margin-bottom: 1%;
+//     --width: 99%;
+//     border-radius: 20px;
+//     display: block;
+//   }

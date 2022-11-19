@@ -13,20 +13,30 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/build-angular": "^14.2.7",
     "@angular/common": "^14.0.0",
     "@angular/core": "^14.0.0",
+    "@angular/fire": "^7.4.1",
     "@angular/forms": "^14.0.0",
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
-    "@ionic/angular": "^6.1.9",
+    "@awesome-cordova-plugins/camera": "^6.1.0",
+    "@awesome-cordova-plugins/file-path": "^6.1.0",
+    "@awesome-cordova-plugins/ionic-webview": "^6.1.0",
+    "@ionic-native/camera": "^5.36.0",
+    "@ionic-native/file": "^5.36.0",
+    "@ionic-native/status-bar": "^5.36.0",
+    "@ionic/angular": "^6.3.3",
+    "@ionic/cordova-builders": "^7.0.0",
+    "cordova-browser": "^6.0.0",
+    "firebase": "^9.14.0",
     "ionicons": "^6.0.3",
     "rxjs": "~6.6.0",
-    "tslib": "^2.2.0",
+    "tslib": "^2.4.1",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^14.0.0",
     "@angular-eslint/builder": "~13.0.1",
     "@angular-eslint/eslint-plugin": "~13.0.1",
     "@angular-eslint/eslint-plugin-template": "~13.0.1",
@@ -36,11 +46,20 @@
     "@angular/compiler-cli": "^14.0.0",
     "@angular/language-service": "^14.0.0",
     "@ionic/angular-toolkit": "^6.0.0",
+    "@ionic/lab": "3.2.15",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",
+    "cordova-android": "^10.1.2",
+    "cordova-plugin-camera": "^6.0.0",
+    "cordova-plugin-device": "2.0.2",
+    "cordova-plugin-file": "^7.0.0",
+    "cordova-plugin-filepath": "^1.6.0",
+    "cordova-plugin-ionic-keyboard": "^2.0.5",
+    "cordova-plugin-ionic-webview": "^5.0.0",
+    "cordova-plugin-statusbar": "^3.0.0",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
@@ -54,8 +73,28 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
+    "statusbar": "^0.2.0",
     "ts-node": "~8.3.0",
     "typescript": "~4.7.3"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-device": {},
+      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-camera": {
+        "ANDROIDX_CORE_VERSION": "1.6.+"
+      },
+      "cordova-plugin-filepath": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-file": {
+        "ANDROIDX_WEBKIT_VERSION": "1.4.0"
+      }
+    },
+    "platforms": [
+      "browser",
+      "android"
+    ]
+  }
 }

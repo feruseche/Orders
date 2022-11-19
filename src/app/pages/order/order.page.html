@@ -1,0 +1,122 @@
+<ion-header no-border class="fixed">
+  <ion-toolbar no-border color="primary">
+    <ion-title>
+      <strong>{{ settingArray['Empresa'] }}</strong>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button shape="round" (click)="confirmReset()">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+      <ion-button shape="round" (click)="searchOrder()">
+        <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header class="sub-header fixed" color="primary" no-border>
+  <ion-toolbar no-border color="primary">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4">
+            <ion-text>
+              <strong>Pedidos</strong>
+            </ion-text>
+          </ion-col>
+          <ion-col size="4" class="ion-text-center">
+            <ion-icon name="reader-outline"></ion-icon>&nbsp;
+            <ion-text>
+              <strong>{{ orderArray.length }}</strong>
+            </ion-text>
+          </ion-col>
+          <ion-col size="4" class="ion-text-right">
+            <ion-icon name="cash-outline"></ion-icon>
+            <ion-text>
+              <strong> $ {{ total.toFixed(2) }}</strong>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true">
+  <div *ngIf="search">
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">
+            <ion-icon name="search-outline" slot="start"></ion-icon>
+            Buscar por nombre
+          </ion-label>
+          <ion-input
+            name="buscador"
+            type="text"
+            max="20"
+            (keyup)="onKeyUpEvent($event)"
+            required
+          >
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-label>
+          <ion-button (click)="closeSearch()" slot="end">
+            <ion-icon name="close-outline" slot="start"></ion-icon>
+            Cerrar
+          </ion-button>
+        </ion-label>
+      </ion-col>
+    </ion-row>
+  </div>
+  <ion-list #lista *ngIf="dataArray.length > 0">
+    <ion-item-group #ItemId>
+      <ion-item-sliding class="no-border"
+        *ngFor="let r of dataArray let i=index"        
+      >
+      <!-- (ionSwipe)="swipeEvent($event, ItemId, r)" -->
+        <ion-item detail (click)="orderClient(r)" style="margin-left: -0.5rem; margin-right: -0.5rem;">
+        <!-- appGesture
+        [gestureOpts]="[{name: 'press'}]"
+        (press)="showClient(r, settingArray, i)"
+        (click)="showClient(r, settingArray, i)" -->
+          <ion-grid>
+            <ion-row>
+              <ion-col size="2">
+                <ion-avatar>
+                  <img [src]="(r.foto) ? changeSecurityRutaFoto(r.foto) : 'assets/img/client.jpg'" style="width: 50px; height: 50px;"/>
+                </ion-avatar>
+              </ion-col>
+              <ion-col size="8">
+                  <ion-label style="height: 2.7rem; margin-top: 0.1rem; border: 0px;" class="ion-text-wrap">
+                    {{ r.nombre | uppercase }}
+                  </ion-label>
+              </ion-col>
+              <ion-col size="2" class="ion-text-right">
+                <ion-row style="line-height: 0.80rem;">
+                  <ion-col>
+                    <ion-text>
+                      <small class="text-muted">{{ r.fecha | date:'d MMM' }}</small>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-item-group>
+  </ion-list>
+ 
+
+  <ion-infinite-scroll threshold="150px" (ionInfinite)="loadDataScroll($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="cargando..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+

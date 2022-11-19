@@ -1,0 +1,86 @@
+<ion-header no-border class="fixed">
+  <ion-toolbar no-border color="primary">
+    <ion-buttons shape="round" slot="start">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <strong>{{ setting['Empresa'] }}</strong>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button shape="round" (click)="confirmRemove()">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+      <ion-button shape="round" (click)="orderClient(clientShow)">
+        <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header class="sub-header fixed" color="primary" no-border>
+  <ion-toolbar no-border color="primary">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <ion-text>
+              <strong>Cliente</strong>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <div
+    class="ion-text-center fotoContent"
+    style="display: flex; justify-content: center"
+  >
+    <img
+      [src]="(clientShow.foto) ? safeImg : 'assets/img/client.jpg'"
+      class="foto"
+    />
+  </div>
+  <ion-item>
+    <ion-icon name="business-outline" slot="start" color="tertiary"></ion-icon>
+    <ion-text>
+      <strong>{{ clientShow.nombre | uppercase }}</strong>
+    </ion-text>
+  </ion-item>
+  <ion-item>
+    <ion-icon name="document-outline" slot="start" color="secondary"></ion-icon>
+    <ion-text> {{ clientShow.rif | uppercase }} </ion-text>
+  </ion-item>
+  <ion-item>
+    <ion-icon name="logo-whatsapp" slot="start" color="success"></ion-icon>
+    <ion-text> {{ clientShow.celular || 'SIN ASIGNAR' }} </ion-text>
+  </ion-item>
+  <ion-item>
+    <ion-icon name="location-outline" slot="start" color="danger"></ion-icon>
+    <ion-text class="ion-text-wrap"> {{ clientShow.direccion }}</ion-text>
+  </ion-item>
+
+  <!-- <ion-button fill="outline" color="secondary" (click)="close()">
+    <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+    <span> Cerrar</span>
+  </ion-button> -->
+
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="options-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="bottom">
+      <ion-fab-button (click)="confirmDelete()" *ngIf="clientShow.foto">
+        <ion-icon name="trash-outline" color="danger"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="getFotoGallery()">
+        <ion-icon name="image-outline" color=""></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="getFotoCamera()">
+        <ion-icon name="camera-outline" color="secondary"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

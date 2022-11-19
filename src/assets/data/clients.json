@@ -1,0 +1,72 @@
+{
+	"pedidos": {
+		"clients": {
+			"128007543": {
+				"foto": "",
+				"codigo": "128007543",
+				"rif": "12800754-3",
+				"nombre": "José Fernando USeche Casadiegos",
+				"celular": "+584160781130",
+				"direccion": "ESTADO MÉRIDA",
+				"deuda": 235.50,
+				"ultimopedido": 0,
+				"totalpedidos": 879.45
+			}
+		},
+		"orders": {
+			"128007543": {
+                              "codigo": "128007543",
+                              "rif": "V10242515",
+                              "nombre": "ABASTOS MARBEL DE JOSE ADOLFO GUILLEN",
+                              "foto": "",
+                              "total": 735.8,
+                              "fecha": "2022-11-14T01:08:23.978Z",
+                              "products" : {
+                                            "400068" : {
+                                                          "foto": "",
+                                                          "codigo": "400068",
+                                                          "nombre": "ADOBO LA COMADRE 12*500GR (G)",
+                                                          "cantidad": 2,
+                                                          "precio": 13,
+                                                          "subtotal": 26
+                                                        }                              
+                                            }
+                          }
+		},
+		"products": {
+                        "370047":{
+                            "foto": "",
+                            "codigo": "370047",
+                            "nombre": "AF TE MANZANILLA McCORMICK 12*10g (G)UN",
+                            "unidad": "CAJITA",
+                            "existencia": "2",
+                            "precio1": "1791",
+                            "precio2": "1791",
+                            "precio3": "1791"
+                        }
+		},
+		"config": {
+			"0": {
+                    "Empresa": "NOYFER C.A.",
+                    "Rif": "1234567890",
+                    "InicioDataCsvClientes": 1,
+                    "ColumnaCodigoClientes": 2,
+                    "ColumnaRifClientes": 5,
+                    "ColumnaNombreClientes": 3,
+                    "ColumnaCelularClientes": 11,
+                    "ColumnaDireccionClientes": 9,
+                    "InicioDataCsvInventario": 1,
+                    "ColumnaCodigoInventario": 0,
+                    "ColumnaNombreInventario": 1,
+                    "ColumnaUnidadInventario": 6,
+                    "ColumnaExistenciaInventario": 14,
+                    "ColumnaPrecio1Inventario": 46,
+                    "ColumnaPrecio2Inventario": 46,
+                    "ColumnaPrecio3Inventario": 46,
+                    "ImageId": 1000015,
+                    "Tema": "light",
+                    "Usuario": "Usuario DEMO"
+                }
+		}
+	}
+}

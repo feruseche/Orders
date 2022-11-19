@@ -1,0 +1,213 @@
+<ion-header no-border class="fixed">
+  <ion-toolbar no-border color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home/order"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <strong>{{ settingArray['Empresa'] }}</strong>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button shape="round" (click)="confirmReset()">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+      <ion-button shape="round">
+        <ion-icon slot="icon-only" name="share-social-outline"></ion-icon>
+      </ion-button>
+      <ion-button shape="round">
+        <ion-icon slot="icon-only" name="share-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header class="sub-header fixed" color="primary" no-border>
+  <ion-toolbar no-border color="primary">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4">
+            <ion-text>
+              <strong>Pedido</strong>
+            </ion-text>
+          </ion-col>
+          <ion-col size="4" class="ion-text-center">
+            <ion-icon name="reader-outline"></ion-icon>&nbsp;
+            <ion-text>
+              <strong>{{ productOrderArray.length }}</strong>
+            </ion-text>
+          </ion-col>
+          <ion-col size="4" class="ion-text-right">
+            <ion-icon name="cash-outline"></ion-icon>
+            <ion-text>
+              <strong> $ {{ orderClient.total.toFixed(2) }}</strong>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header class="client-header" color="medium" *ngIf="!search">
+  <ion-toolbar no-border>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="2" class="ion-text-right">
+          <ion-avatar style="margin-left: -0.5rem;">
+            <img [src]="(client.foto) ? changeSecurityRutaFoto(client.foto) : 'assets/img/client.jpg'" style="width: 52px; height: 52px;"/>
+          </ion-avatar>
+        </ion-col>
+        <ion-col size="10">
+          <ion-text>
+            <strong><i>{{ client.rif | uppercase }}</i></strong>
+            {{ client.nombre | uppercase }}
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="3">
+          <small>
+            <strong>CANTIDAD</strong>          
+          </small>
+        </ion-col>
+        <ion-col size="3">
+          <small>
+            <strong>PRECIO</strong>          
+          </small>
+        </ion-col>
+        <ion-col size="3">
+          <small>
+            <strong>PRODUCTO</strong>          
+          </small>
+        </ion-col>
+        <ion-col size="3" class="ion-text-center">
+          <small><strong>SUBTOTAL</strong></small>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header class="search" *ngIf="search">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">
+            <ion-icon name="search-outline" slot="start"></ion-icon>
+              Buscar producto
+          </ion-label>
+          <ion-input
+            name="buscador"
+            type="text"
+            max="20"
+            (keyup)="onKeyUpEvent($event)"
+            required
+          >
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3">
+        <ion-text *ngIf="nreg>0">
+          <small>{{ nreg }} coincidencias</small>
+        </ion-text>
+      </ion-col>
+
+      <ion-col>
+        <ion-label>
+          <ion-button (click)="closeSearch()" slot="end">
+            <ion-icon name="close-outline" slot="start"></ion-icon>
+            Cerrar
+          </ion-button>
+        </ion-label>
+      </ion-col>
+
+      <ion-col size="3">
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content [scrollEvents]="true" *ngIf="!search" color="medium" class="pedido">
+  <ion-list #lista *ngIf="productOrderArray.length > 0">
+    <ion-item-group #ItemId>
+      <ion-item-sliding
+      *ngFor="let p of productOrderArray, let i=index"
+      (ionSwipe)="swipeEvent($event, ItemId, p.codigo)"
+      class="no-border"
+      >
+        <ion-item 
+        detail
+        (click)="editProductOrder(p)"
+        [ngClass]="(i % 2 === 0) ? 'oscuro' : 'claro'"
+        style="margin-left: -1rem; margin-right: -0.75rem;"
+        >
+        <ion-grid>
+          <ion-row>
+            <ion-col size="1">
+              <ion-avatar>
+                <img [src]="(p.foto) ? changeSecurityRutaFoto(p.foto) : 'assets/img/caja.jpg'" style="width: 32px; height: 32px;"/>
+              </ion-avatar>
+            </ion-col>
+            <ion-col size="8" class="ion-text-wrap"  style="margin-left: 0.5rem;">
+              <small><strong><i>{{ p.cantidad }} * {{ p.precio.toFixed(2) }}</i></strong> {{ p.nombre }} </small>
+            </ion-col>
+            <ion-col size="3" style="margin-right: -1rem; text-align: right;">
+              <span style="width: 120px;"><small>{{ p.subtotal.toFixed(2) }}</small></span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        </ion-item>
+        <ion-item-options side="start">
+          <ion-item-option color="dark" expandable>
+            <ion-icon name="trash-outline" slot="icon-only" color="danger"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-item-group>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button  (click)="searchProduct()" color="primary">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-content [scrollEvents]="true" *ngIf="search" class="inventario">
+  <ion-list #lista *ngIf="search">
+    <ion-item-group #ItemId>
+      <ion-item-sliding *ngFor="let p of dataArray; let i=index" class="no-border">
+        
+        <ion-item
+          detail 
+          style="margin-left: -1rem; margin-right: -0.75rem;"
+          (click)="selectProductOrder(p, settingArray ,i)"
+          class="no-border"
+        >
+        <ion-grid>
+          <ion-row>
+            <ion-col size="1">
+              <ion-avatar>
+                <img [src]="(p.foto) ? changeSecurityRutaFoto(p.foto) : 'assets/img/caja.jpg'" style="width: 32px; height: 32px;"/>
+              </ion-avatar>
+            </ion-col>
+            <ion-col size="11" class="ion-text-wrap"  style="margin-left: 0.5rem; margin-right: -1rem;">
+              <small>{{ p.nombre }} ({{ p.unidad }})</small>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      </ion-item-sliding>
+    </ion-item-group>
+  </ion-list>
+
+  <ion-infinite-scroll threshold="150px" (ionInfinite)="loadDataScroll($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="cargando..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

@@ -1,5 +1,7 @@
 {
   "name": "Orders",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
