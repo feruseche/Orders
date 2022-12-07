@@ -13,6 +13,8 @@ import { DeleteOrderUsecase } from './application/delete.order.usecase';
 import { ReadOrderUsecase } from './application/read.order.usecase';
 import { ResetOrderUsecase } from './application/reset.order.usecase';
 import { OrderModel } from './model/order.model';
+import { ReadOrderCloudUsecase } from './application/read.order.cloud.usecase';
+import { UpdateOrderCloudUsecase } from './application/update.order.cloud.usecase';
 
 @Component({
   selector: 'app-order',
@@ -47,6 +49,8 @@ export class OrderPage implements OnInit {
     private readOrderUsecase: ReadOrderUsecase,
     private deleteOrderUsecase: DeleteOrderUsecase,
     private resetOrderUsecase: ResetOrderUsecase,
+    private readOrderCloudUsecase: ReadOrderCloudUsecase,
+    private uploadOrdersCloud: UpdateOrderCloudUsecase,
   ) 
   {
     this.paginate = 20;
@@ -181,6 +185,23 @@ export class OrderPage implements OnInit {
         event.target.complete();
       }, 200);
     }
+  }
+
+  dCloud() {
+    this.orderArray = this.readOrderCloudUsecase.execute();
+
+    this.totalPedido();
+    this.nreg = this.clientArray.length;
+    this.dataArray = this.orderArray.slice(0, this.lote);
+  }
+
+  uploadOrders() {
+    this.helper.loading(Messenger.uploadingData,1000);
+    this.orderArray.forEach(
+      (o: OrderModel) => { 
+          this.uploadOrdersCloud.execute(o) 
+      }
+    );
   }
 
 }

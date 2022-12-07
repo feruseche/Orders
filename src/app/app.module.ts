@@ -11,6 +11,7 @@ import { ClientStorage } from './pages/client/repository/storage/client.storage'
 import { InventoryRepository } from './pages/inventory/repository/inventory.repository';
 import { InventoryStorage } from './pages/inventory/repository/storage/inventory.storage';
 import { OrderRepository } from './pages/order/repository/order.repository';
+import { OrderRepositoryCloud } from './pages/order/repository/order.repository.cloud';
 import { OrderStorage } from './pages/order/repository/storage/order.storage';
 import { SettingRepository } from './pages/setting/repository/setting.repository';
 import { SettingStorage } from './pages/setting/repository/storage/setting.storage';
@@ -24,6 +25,7 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { HttpClientModule } from '@angular/common/http';
 import { InventoryRepositoryCloud } from './pages/inventory/repository/inventory.repository.cloud';
 import { InventoryFirebase } from './pages/inventory/repository/firebase/inventory.firebase';
+import { OrderFirebase } from './pages/order/repository/firebase/order.firebase';
 
 
 @NgModule({
@@ -45,6 +47,7 @@ import { InventoryFirebase } from './pages/inventory/repository/firebase/invento
     { provide: InventoryRepository, useClass: InventoryStorage },
     { provide: InventoryRepositoryCloud, useClass: InventoryFirebase },
     { provide: OrderRepository, useClass: OrderStorage },
+    { provide: OrderRepositoryCloud, useClass: OrderFirebase },
     { provide: SettingRepository, useClass: SettingStorage },
     { provide: LogRepository, useClass: LogStorage },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

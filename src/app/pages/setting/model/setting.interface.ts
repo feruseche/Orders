@@ -18,4 +18,7 @@ export interface SettingInterface
     ColumnaPrecio2Inventario: number;
     ColumnaPrecio3Inventario: number;
     ImageId: number;
+    CodigoVendedor: string;
+    NombreVendedor: string;
+    FotoVendedor: string;
 }

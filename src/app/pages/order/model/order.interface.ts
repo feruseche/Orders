@@ -7,6 +7,7 @@ export interface OrderInterface
     foto: string;
     total: number;    
     fecha: Date;
+    vendedorCodigo: string;
     products: ProductOrderInterface[];
 }
 

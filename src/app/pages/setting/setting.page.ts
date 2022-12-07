@@ -6,12 +6,15 @@ import { MessengerService as Messenger} from '../../helpers/messenger.service';
 import { ReadSettingUsecase } from './application/read.setting.usecase';
 import { SaveSettingUsecase } from './application/save.setting.usecase';
 import { HelperApp } from '../../helpers/helper';
+import { DomSanitizer } from '@angular/platform-browser';
+import { WebView } from '@awesome-cordova-plugins/ionic-webview/ngx';
+
 
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.page.html',
   styleUrls: ['./setting.page.scss'],
-  providers: [ StatusBar ],
+  providers: [ StatusBar, WebView ],
 })
 export class SettingPage implements OnInit {
 
@@ -27,6 +30,8 @@ export class SettingPage implements OnInit {
     private loadingController: LoadingController, 
     private popover: PopoverController,
     private saveSettingUsecase: SaveSettingUsecase,
+    private sanitizer: DomSanitizer,
+    private webView: WebView,
     ) 
     { }
 
@@ -85,5 +90,10 @@ export class SettingPage implements OnInit {
 
   ionViewWillEnter() {
     this.loadConfig();
+  }
+
+  changeSecurityRutaFoto(rutaFoto: string) {
+    const safeImg = this.sanitizer.bypassSecurityTrustUrl(this.webView.convertFileSrc(rutaFoto));
+    return safeImg;
   }
 }

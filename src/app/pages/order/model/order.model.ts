@@ -8,6 +8,7 @@ export class OrderModel implements OrderInterface
     foto: string;
     total: number;
     fecha: Date;
+    vendedorCodigo: string;
     products: ProductOrderModel[];
 }
 

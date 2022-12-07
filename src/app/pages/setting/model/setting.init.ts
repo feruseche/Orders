@@ -21,6 +21,9 @@ export class SettingInit implements SettingInterface
     ColumnaPrecio2Inventario: number = 0;
     ColumnaPrecio3Inventario: number = 0;
     ImageId: number = 1000000;
+    CodigoVendedor: '001';
+    NombreVendedor: 'Vendedor DEMO 001';
+    FotoVendedor: '';
 
     constructor() 
     {
